@@ -1,0 +1,124 @@
+#!/bin/bash
+
+# creating a menu with the following options
+echo "SELECT YOUR CHOICE";
+echo "1. Factorial of a number"
+echo "2. Greater of 3"
+echo "3. Prime Number"
+echo "4. Pallindrome Number"
+echo "5. Pallindrome String"
+echo "6. Exit from menu "
+echo -n "Enter your menu choice [1-6]: "
+
+# Running a forever loop using while statement
+# This loop will run until select the exit option.
+# User will be asked to select option again and again
+while :
+do
+
+# reading choice
+read choice
+
+# case statement is used to compare one value with the multiple cases.
+case $choice in
+  # Pattern 1
+  1)  echo "You have selected the option 1"
+           echo "Enter the Number"
+            read num
+
+            fact=1
+            while [ $num -gt 1 ]
+            do 
+                 fact=$((fact * num))
+                 num=$((num - 1))
+            done
+
+       echo $fact;;
+
+  
+  # Pattern 2
+  2)  echo "You have selected the option 2"
+              echo "Enter Num1"
+              read num1
+              echo "Enter Num2"
+              read num2
+              echo "Enter Num3"
+              read num3
+
+              if [ $num1 -gt $num2 ] && [ $num1 -gt $num3 ]
+                then
+                     echo "Greatest is"
+                        echo $num1
+               elif [ $num2 -gt $num1 ] && [ $num2 -gt $num3 ]
+                 then
+                     echo "Greatest is"
+                     echo $num2
+               else
+                     echo "Greatest is"
+   					 echo $num3
+		fi;;
+  # Pattern 3
+  3)  echo "You have selected the option 3"
+echo -e "Enter Number : \c"
+read n
+for((i=2; i<=$n/2; i++))
+do
+  ans=$(( n%i ))
+  if [ $ans -eq 0 ]
+  then
+    echo "$n is not a prime number."
+    exit 0
+  fi
+done
+echo "$n is a prime number.";;
+#Pattern 4
+4) echo "You have selected option 4"
+
+echo "Enter the Number"
+read num
+s=0
+rev=""
+
+temp=$num
+
+while [ $num -gt 0 ]
+do
+	s=$(( $num % 10 ))
+	
+	num=$(( $num / 10 ))
+	
+	rev=$( echo ${rev}${s} )
+done
+
+if [ $temp -eq $rev ];
+then
+	echo "Number is palindrome"
+else
+	echo "Number is NOT palindrome"
+fi;;
+
+#Pattern 5
+
+5) echo "input your string without space"
+read vstr
+for i in $(seq 0 ${#vstr})
+do
+	    rvstr=${vstr:$i:1}${rvstr}
+done
+
+if [ "$vstr" = "$rvstr" ]
+then
+	echo "String is palindrome."
+else
+	echo "String is not plaindrome."
+fi;;
+
+   # Pattern 6
+  6)  echo "QUITTING...."
+      exit;;
+  # Default Pattern
+  *) echo "invalid option";;
+  
+esac
+  echo -n "Enter your menu choice [1-6]: "
+done:
